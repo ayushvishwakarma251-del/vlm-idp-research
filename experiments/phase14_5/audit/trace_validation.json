@@ -1,0 +1,44 @@
+{
+  "total_records": 1100,
+  "valid_records": 1100,
+  "invalid_records": 0,
+  "duplicate_records": 0,
+  "conditions": {
+    "B14-A": 275,
+    "B14-B": 275,
+    "B14-C": 275,
+    "B14-D": 275
+  },
+  "seeds": {
+    "42": 220,
+    "123": 220,
+    "456": 220,
+    "789": 220,
+    "101112": 220
+  },
+  "unique_families": 11,
+  "unique_documents": 55,
+  "unique_queries": 55,
+  "schema_fields": [
+    "experiment_id",
+    "condition",
+    "condition_name",
+    "seed",
+    "query_id",
+    "document_id",
+    "family_id",
+    "modality",
+    "pages_fed",
+    "page_reduction_pct",
+    "input_tokens",
+    "output_tokens",
+    "physical_latency_s",
+    "peak_vram_mb",
+    "exact_match_accuracy",
+    "grounding_iou",
+    "unsupported_answer_rate",
+    "safe_useful_coverage"
+  ],
+  "suc_accuracy_concordance_rate": 1.0,
+  "generation_mode": "PARAMETRIC_SIMULATION_FROM_PHYSICAL_CALIBRATION"
+}

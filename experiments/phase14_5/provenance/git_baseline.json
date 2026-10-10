@@ -1,0 +1,31 @@
+{
+  "audit_phase": "14.5",
+  "current_branch": "master",
+  "current_head_full": "baf597c1512dcce4b2b4c91a0d0a874b1459e332",
+  "current_head_short": "baf597c1",
+  "expected_phase14_commit": "583e8a8f",
+  "actual_phase14_commit_full": "583e8a8fa93967a15ddfbdb97d247cfcdbaad922",
+  "phase14_parent_commit_full": "62f3c632bf1e4fbdbdd13e9375c97412d4c652ef",
+  "phase14_parent_commit_short": "62f3c632",
+  "is_phase14_ancestor_of_head": true,
+  "commits_since_phase14": [
+    "baf597c1 feat(fixtures): add sample_test_invoice.pdf for testing Document Studio",
+    "8a2f8014 docs: add CLASSIFICATION.md and integrate into README",
+    "b7f4c360 feat(orchestrator): support tabular column matching for rate, price, tax, and multi-line dates",
+    "7408b819 fix(orchestrator): integrate PyMuPDF layout parsing and spatial proximity value extraction",
+    "d66a8e37 fix(ui): improve upload error handling and diagnostics",
+    "4449e13d feat(phase15): add interactive document extraction studio",
+    "67376e46 feat(launcher): add run.bat launcher and full-stack API server on localhost:8896",
+    "371c9332 fix(assets): resolve SVG CSS transform collision and layout overlap in architecture pipeline",
+    "df26e228 feat(assets): track 3d animated svgs and scrolling ticker in git",
+    "075d98ef feat(docs): embed native 3d animated isometric visuals and scrolling ticker into readme",
+    "e6df91d4 docs: add polished research readme, mit license, and interactive 3d web showcase"
+  ],
+  "configured_remotes": [
+    "origin\thttps://github.com/officialayush5839-arch/vlm-idp-research.git (fetch)",
+    "origin\thttps://github.com/officialayush5839-arch/vlm-idp-research.git (push)"
+  ],
+  "working_tree_porcelain": "",
+  "working_tree_clean": true,
+  "phase14_5_preexisting_work": false
+}

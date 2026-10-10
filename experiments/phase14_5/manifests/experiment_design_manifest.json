@@ -1,0 +1,97 @@
+{
+  "experiment_name": "Phase 14 Physical CUDA VLM Benchmark",
+  "research_title": "Vision-Language Models for Intelligent Document Processing under Real-World Visual Degradation",
+  "hardware_environment": {
+    "device": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "sm_architecture": "Ampere SM 8.6",
+    "physical_vram_mb": 6144,
+    "cuda_driver": "13.0",
+    "pytorch_cuda": "12.6",
+    "torch_version": "2.14.1+cu126"
+  },
+  "target_model_evaluation": {
+    "model_name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "fp16_parameter_footprint_gb": 14.5,
+    "fp16_allocation_negative_control": "16.0 GB synthetic tensor allocation on 6.0 GB GPU triggered CUDA OutOfMemoryError",
+    "status": "NOT_PHYSICALLY_EXECUTABLE_UNDER_6GB_FP16"
+  },
+  "fallback_model_evaluation": {
+    "model_name": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "architecture": "Idefics3ForVision2Seq",
+    "parameter_count": "~500M",
+    "precision_modes_benchmarked": [
+      {
+        "id": "Q0_FP16",
+        "precision": "torch.float16",
+        "quantization": "None"
+      },
+      {
+        "id": "Q1_INT8",
+        "precision": "int8",
+        "quantization": "bitsandbytes load_in_8bit"
+      },
+      {
+        "id": "Q2_INT4",
+        "precision": "int4_nf4",
+        "quantization": "bitsandbytes load_in_4bit (nf4)"
+      }
+    ]
+  },
+  "dataset_population": {
+    "corpus": "Phase 12 Authentic Real-World Document Corpus",
+    "total_corpus_documents": 260,
+    "total_corpus_queries": 260,
+    "total_corpus_families": 52,
+    "splits": {
+      "train_families": 31,
+      "train_documents": 155,
+      "val_families": 10,
+      "val_documents": 50,
+      "test_families": 11,
+      "test_documents": 55,
+      "test_queries": 55
+    },
+    "documents_per_family": 5,
+    "queries_per_family": 5,
+    "family_isolation": "Strict cluster-level partitioning; 0 family overlap across splits"
+  },
+  "experimental_matrix": {
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      101112
+    ],
+    "seed_count": 5,
+    "conditions": [
+      {
+        "condition_id": "B14-A",
+        "name": "full_document_vlm",
+        "pages_fed": 5,
+        "description": "Full document unpruned VLM baseline"
+      },
+      {
+        "condition_id": "B14-B",
+        "name": "retrieval_pruned_vlm",
+        "pages_fed": 2,
+        "description": "Multimodal retrieval page-pruned VLM"
+      },
+      {
+        "condition_id": "B14-C",
+        "name": "retrieval_grounded_vlm",
+        "pages_fed": 2,
+        "description": "Multimodal retrieval + spatial grounding VLM"
+      },
+      {
+        "condition_id": "B14-D",
+        "name": "full_proposed_pipeline",
+        "pages_fed": 2,
+        "description": "Full proposed pipeline with uncertainty & abstention"
+      }
+    ],
+    "total_traces_planned": 1100,
+    "traces_per_condition": 275,
+    "traces_per_seed": 220
+  }
+}

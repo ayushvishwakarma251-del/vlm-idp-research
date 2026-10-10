@@ -1,0 +1,20 @@
+{
+  "audit_phase": "14.5",
+  "target_commit": "583e8a8f",
+  "total_audited_artifacts": 21462,
+  "matched_count": 21461,
+  "missing_count": 0,
+  "mismatched_count": 1,
+  "missing_files": [],
+  "mismatched_files": [
+    {
+      "path": "README.md",
+      "expected": "7959b3d61b6a8b04a684e2d7e169e5cc3a7019dc0e53d617535b99e84ec4b82c",
+      "actual": "5dd060cef6951efce85e1bccbf7d06cefc50ec860cfe15193adec58d8221c1e5",
+      "classification": "REPORT",
+      "is_historical": true
+    }
+  ],
+  "phase14_files_modified": [],
+  "status": "VERIFIED_WITH_EXPLAINED_MODIFICATIONS"
+}

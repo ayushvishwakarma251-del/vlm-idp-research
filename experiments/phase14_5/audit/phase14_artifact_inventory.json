@@ -1,0 +1,712 @@
+[
+  {
+    "path": "experiments/phase14/frozen_phase13_sha256_manifest.json",
+    "artifact_type": "MANIFEST_OR_SCRIPT",
+    "size_bytes": 3898204,
+    "sha256": "ae16763b2fdf266fac373017b23508971ceffa5f6d2f3020fae7f7f9ffceda74",
+    "record_count": 7,
+    "schema_valid": true,
+    "generated_by": "UTILITY",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/test_manifest.json",
+    "artifact_type": "MANIFEST_OR_SCRIPT",
+    "size_bytes": 25708,
+    "sha256": "9d6f9aa96028c1eaa5975ba5a815a9319bcf5a062516ab1e8778b6dadef421a0",
+    "record_count": 10,
+    "schema_valid": true,
+    "generated_by": "UTILITY",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/verify_freeze_manifest.py",
+    "artifact_type": "MANIFEST_OR_SCRIPT",
+    "size_bytes": 939,
+    "sha256": "f7a5e879eaf7e60653ec29971a9a1f66a3e49fb84ad7d976f940f45b2ec17474",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "UTILITY",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/environment/compatibility_report.md",
+    "artifact_type": "ENVIRONMENT_SPEC",
+    "size_bytes": 2484,
+    "sha256": "c3a68999bfb8c980679ce5ca0a7f7b0d6eaff60b4c8910080ed537f0187228a5",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "ENV_PROVENANCE",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/environment/environment_lock.txt",
+    "artifact_type": "ENVIRONMENT_SPEC",
+    "size_bytes": 1994,
+    "sha256": "44999615cd441ae46aa7dfc7f422dcf3900cbe07f1affae2253a79eb1d80105c",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "ENV_PROVENANCE",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/environment/package_versions.json",
+    "artifact_type": "ENVIRONMENT_SPEC",
+    "size_bytes": 397,
+    "sha256": "e15979878c936d9e4e4dc2260f0d90b8615d848190cc356abeb79a51d33e9ec5",
+    "record_count": 14,
+    "schema_valid": true,
+    "generated_by": "ENV_PROVENANCE",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/environment/requirements_phase14.txt",
+    "artifact_type": "ENVIRONMENT_SPEC",
+    "size_bytes": 1994,
+    "sha256": "44999615cd441ae46aa7dfc7f422dcf3900cbe07f1affae2253a79eb1d80105c",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "ENV_PROVENANCE",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/figures/fig_01_cuda_vram_by_precision.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 91268,
+    "sha256": "f1810cce4d2193467b407fd87b187218141a1b7459f548459525808899e17335",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_02_e2e_latency_by_precision.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 82478,
+    "sha256": "f103e8c29f30485f746a9fb7b07fbaae4c64a5720c113429708a100e1d3ffc7b",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_03_throughput_by_precision.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 77038,
+    "sha256": "4b488a4ca7f9c1d3025ee4eb78a1e0fe42c97ec2ab425204c295d4ceab261351",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_04_model_loading_time.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 86189,
+    "sha256": "d6603347a2741d5050584c3f43ab2ec853e2e48460e4c6220dea2b552c3f607e",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_05_pareto_vram_vs_latency.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 109117,
+    "sha256": "83a718f8256b39c778af3a748bdb96555eb1f8445670c665a652a0feaf531cae",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_06_context_scaling_latency.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 79707,
+    "sha256": "44dfd05a71fbe7d989092d3fcef4a1bdbe26b35f62a05e9b4461a0ab2fada6fc",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_07_accuracy_by_condition.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 75312,
+    "sha256": "4ea10428e0cedd7a3d8d605469564cb930f5f76d487317b353f129769c13c516",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_08_grounding_iou_by_condition.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 73406,
+    "sha256": "faa387d0d8f6c067f2942cb575f6ed4851ded336fb4f631bf1df084b10239e59",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_09_unsupported_answer_rate.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 74995,
+    "sha256": "24e72e95cacc231f0866f716f322b9eb36f3b5cb3bdcca2896060bd5079ef7c7",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_10_safe_useful_coverage.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 80698,
+    "sha256": "0e682a8a0d37a28c6f1e2ab200156545ca4e2d07ce7ae5f3304dc181ba748181",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_11_latency_by_modality.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 87774,
+    "sha256": "cf985a85bba6bff7978e45950c0ffbf77448240eff20c96b77ec43aa8e4e94c6",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/figures/fig_12_precision_quality_tradeoff.png",
+    "artifact_type": "FIGURE",
+    "size_bytes": 131157,
+    "sha256": "8310f84de7f50443727d79aa4ad1e44fda03fddd78961bab7a50cd537c5a5134",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/models/chat_template.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 429,
+    "sha256": "a68ad1a42681ae44eacd109ff8dd56a840f761c03d72f4ff4c515d092f882168",
+    "record_count": 1,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/config.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 7339,
+    "sha256": "daacbbca6af3c34e50466c72aed2df4553a08084f6a0551d4ae420a241cb66c6",
+    "record_count": 12,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/generation_config.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 136,
+    "sha256": "067a2a54e5f87162ecac6e0e911cc4665fc8f7f3324794ecbac0f76badb56636",
+    "record_count": 5,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/model.safetensors",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 1015025832,
+    "sha256": "d05b567eeaf534e83d375551f068ed57b5f52d37c657197f644af5ef9db091a2",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/preprocessor_config.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 486,
+    "sha256": "6cb6e36d6fcb88ca1502c4a26750715dc3e7dedddc9a8f17b27d8d167d1457e7",
+    "record_count": 14,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/special_tokens_map.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 1069,
+    "sha256": "aa0ff906077086dfa9734a7f97f68c825877a48f9468807be65504495cdeef09",
+    "record_count": 5,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/tokenizer.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 3548256,
+    "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+    "record_count": 9,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/models/tokenizer_config.json",
+    "artifact_type": "MODEL_WEIGHTS_CONFIG",
+    "size_bytes": 28249,
+    "sha256": "36c6fd44d07d10fd8180ee6b46dcccf69fb7c06753968ff0d7e17b8bfe17b777",
+    "record_count": 15,
+    "schema_valid": true,
+    "generated_by": "DOWNLOADED_PRETRAINED",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "experiments/phase14/tables/table_01_hardware.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 138,
+    "sha256": "9acbc95ffbb57b798ee9b0b78521d4c49756e1eea481b07631dd86feda4736ee",
+    "record_count": 1,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_02_environment.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 115,
+    "sha256": "9f08afb893177b0bd05a26387c944c4c96bb909b78af1aa6a286ee5276b6061d",
+    "record_count": 1,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_03_model_registry.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 177,
+    "sha256": "a453088e308c54e861bdca79c2ce4eab7e4d0ef8aacd89d5b7444f2f191db548",
+    "record_count": 2,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_04_quantization_matrix.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 202,
+    "sha256": "e76e6f0a900f27d3ae38671db27afa065992b04698de4297eea1f45881906380",
+    "record_count": 3,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_05_memory.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 73,
+    "sha256": "b6943bdf5acf4c9d0257a7ae82aef2a1dc135e140d547aad4391bc6bceee33be",
+    "record_count": 3,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_06_latency.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 69,
+    "sha256": "9d9a4513bb87a7ace098a76f7b7b30293321c9aad8e0fb2ea553633311222a1e",
+    "record_count": 3,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_07_throughput.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 72,
+    "sha256": "8010a7bda57349c85f6e7701ea85fb681286a0e2f0eb300fc2dc4d0544e83c74",
+    "record_count": 3,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_08_quality.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 225,
+    "sha256": "76fc1b7205eea18e99195bf769377963a778aa988d7727498dbf0aded216a5be",
+    "record_count": 4,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_09_grounding.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 233,
+    "sha256": "0ef8085ab21d9b4c2cc53a535c73f3a5e62de0fc5ad1afdee841a44cf46ef389",
+    "record_count": 4,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_10_safety.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 239,
+    "sha256": "935d6ddd35f1ef455d4bb6b6c2e120a28b6b29a88078e672ea452b38dcbcbc72",
+    "record_count": 4,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_11_retrieval_efficiency.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 196,
+    "sha256": "bd5286610aacb2cbf2fed4d534b3c417998596f9df3016b6802184fda33190ed",
+    "record_count": 4,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_12_end_to_end.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 532,
+    "sha256": "87bd78ba52d068b83fce019fc18624376a97fe77ed378bf189623e522868a588",
+    "record_count": 4,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_13_statistical_tests.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 325,
+    "sha256": "8de9bd471f08d163e91f8dd9f90f04cbcf536363e42de4bf222b6e62833e3acf",
+    "record_count": 2,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_14_failures.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 154,
+    "sha256": "ff669f4bcf91616fd645a5dd40896ee2373ed1a8bcc6b3f1372ff1ee41383693",
+    "record_count": 2,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/tables/table_15_reproducibility.csv",
+    "artifact_type": "TABLE",
+    "size_bytes": 152,
+    "sha256": "d6114918057d51cd6852578494bb9cb86091ccd9e6c264b97e68d074319a8a72",
+    "record_count": 2,
+    "schema_valid": true,
+    "generated_by": "CODE_GENERATED",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "experiments/phase14/traces/physical_inference_traces.jsonl",
+    "artifact_type": "RAW_TRACE",
+    "size_bytes": 561642,
+    "sha256": "973ebd3af67e3fee0c401f39b280790f06b05df6ed45adf18e52d3bf8d7bf9cc",
+    "record_count": 1100,
+    "schema_valid": true,
+    "generated_by": "PHYSICAL_EXECUTION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/audit.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 1888,
+    "sha256": "2b22d4d1b1a05cf7d10a95db17e2aa6e74b5fbb77887025e8a96127d5180bada",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/experiments.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 18987,
+    "sha256": "4069c4f3fdb3762e536ec592ad34336ab759754e665590504f8e6bf0ef34483e",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/figures.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 10972,
+    "sha256": "0b1240feddf90af59e019b191ef7918585673a1b16b66c6c4a52fd7903db57f4",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/hardware_gate.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 3492,
+    "sha256": "7975028e9be2c9a740a19033422bac0b50790be449676d2a9756d85b3ff93f79",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/statistics.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 2028,
+    "sha256": "dc396eeaa722b7f12550cea3521a5805b3dbecfeaecd71c26adb9a9d2cabee09",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/telemetry.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 2960,
+    "sha256": "d54808d31b47ef4d7697dbb70feda4f05bbfabdb8ab060073938894e360634ad",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "src/phase14/timing.py",
+    "artifact_type": "SOURCE_CODE",
+    "size_bytes": 2201,
+    "sha256": "26f7119f7cfed1dfa0bf122cf35200c3b0d2f84dcdf973f02d4ad58537e87b3e",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "CODE_IMPLEMENTATION",
+    "reproducible_from_retained_inputs": false
+  },
+  {
+    "path": "reports/phase14/ENVIRONMENT_SETUP.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 2133,
+    "sha256": "e50f7730a4af45bf147a737babb755a5dd8af06829e6097ca42a37189d8b1040",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/FAILURE_ANALYSIS.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1782,
+    "sha256": "a666903a1f3a2596dec3c4321e47cb2f89b9ea6103dc2a5b90b8047bbe345507",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/FEASIBILITY_MATRIX.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1782,
+    "sha256": "ee1881e325b6080a9b4bf2a2365c77312d876ee5cc4b7b2234edb9303c3e8ec1",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/FINAL_AUDIT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1125,
+    "sha256": "a37d6447de153b35d7588e4c8e8bcb3ab12916c85d6e982c5109375cca6f8a83",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/GROUNDING_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1331,
+    "sha256": "99e00f21c6505eb2b775e0204e881a425533c5c94fad211a044b0bced1706bb5",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/HARDWARE_ENVIRONMENT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1903,
+    "sha256": "029f82c79362b93b8ef9c79b2b1e877fafb054c4ac8261fc3e9b6ff2ce3b610d",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/HYPOTHESIS_DECISION.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1433,
+    "sha256": "fbb3a38fb3b9d53f779eca5cf8090ccf8009e35c9e7eb6766fdebf59c1ee8cf6",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/IEEE_INTEGRATION.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 3636,
+    "sha256": "bf748e43f033fd50f5b12512bc8988d95d8396b62bc39b71f5c052e86f856b2c",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/LATENCY_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1839,
+    "sha256": "686ee765c2b2664e4a71e70b23fe0a81eed683e94ccdfeebacaca8c6ff17c970",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/MEMORY_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1342,
+    "sha256": "0a4da16924d22ce48c2d8b879cebcd1ac95bc43675daa19bd1bbe86af7c5eb28",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/MODEL_SELECTION.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 2725,
+    "sha256": "67ef6a9f93c289a645cacc4f828b2a8c361fd393ab5c3a54f898eadf46779f6d",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/PHASE13_VS_PHASE14.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1968,
+    "sha256": "abe68d9d667b9d8eb49faba3f49ad09f4743ce4d3d7ef519bc25d820c4d4df9c",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/PHASE14_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 4189,
+    "sha256": "c0bb1dacd6487d4983c9530e684c3b455989fa6b04a37445e769929a502d4ae0",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/PRE_PHASE14_AUDIT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 3857,
+    "sha256": "da4f8a99236f8f83b9cbfbbc3c3f50fb828097c3905d9ad8861d9b39da5725a4",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/QUALITY_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1556,
+    "sha256": "c05845489a37262e77ad051941999db5e21990ed8dbcb27aed16b2a5e5ad3558",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/QUANTIZATION_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 2420,
+    "sha256": "b08ffcc1ac1106122ca5649b0bcf772d5dbe659035ab06e8cd15e1a1daec7675",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/REPRODUCIBILITY_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1460,
+    "sha256": "34c5bb0f5b9ed41aa1471d08b18d4ea8346885f4171cbe0803ca71c2c10dd15f",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/RETRIEVAL_EFFICIENCY.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1448,
+    "sha256": "a40e3b565f752997202489c7f29495dda2e920acba2061ba31c15b4aad3d03ef",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/SAFETY_REPORT.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1673,
+    "sha256": "57dd4a1e1c37e896d621e939a265a61e5343917a2599e6cf97dcb154366570f3",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "reports/phase14/STATISTICAL_ANALYSIS.md",
+    "artifact_type": "RESEARCH_REPORT",
+    "size_bytes": 1876,
+    "sha256": "55836f5ba97c686d5741aef68130687f85c21d27cc6e160f841222f94651e67f",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "MANUSCRIPT_REPORT",
+    "reproducible_from_retained_inputs": true
+  },
+  {
+    "path": "tests/test_phase14_systems.py",
+    "artifact_type": "TEST_SUITE",
+    "size_bytes": 5243,
+    "sha256": "db7088476b7d56d0b9faf5774dc0f78c99eec80ecffa347c500b2146a266150c",
+    "record_count": null,
+    "schema_valid": true,
+    "generated_by": "TEST_CODE",
+    "reproducible_from_retained_inputs": false
+  }
+]
