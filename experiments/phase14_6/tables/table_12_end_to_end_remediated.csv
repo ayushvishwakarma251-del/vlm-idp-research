@@ -1,0 +1,5 @@
+Condition,Description,Execution_Class,Exact_Match_Accuracy,Historical_SUC,Historical_SUC_Coupled,Remediated_SUC_Grounded_IoU50,Grounding_IoU_Mean,UAR_Unconditional_Pct,UAR_Conditional_Pct,Mean_Latency_s,Context_Page_Reduction_Pct
+B14-A,full_document_vlm,SIMULATED_END_TO_END,72.73,72.73,True,18.18,0.4527,22.91,84.0,7.485,0.0
+B14-B,retrieval_pruned_vlm,SIMULATED_END_TO_END,81.09,81.09,True,81.09,0.6477,4.73,25.0,3.752,60.0
+B14-C,retrieval_grounded_vlm,SIMULATED_END_TO_END,86.18,86.18,True,86.18,0.7553,1.82,13.16,3.751,60.0
+B14-D,full_proposed_pipeline,SIMULATED_END_TO_END,89.09,89.09,True,89.09,0.7994,1.09,10.0,3.749,60.0

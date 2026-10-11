@@ -1,0 +1,110 @@
+{
+  "phase": "14.6",
+  "timestamp": "2026-10-11T20:41:00Z",
+  "files": {
+    "src/phase14_6/provenance.py": {
+      "sha256": "e758b5a8a7ae375f59233a7a61fb841b24d0c211d9348fe2287e9fe9941552be",
+      "size_bytes": 4485
+    },
+    "src/phase14_6/metrics.py": {
+      "sha256": "410b70b1bfa31d9e85b154db79239cb2329e2173e30aa27c328abd66088dbf12",
+      "size_bytes": 4839
+    },
+    "src/phase14_6/statistics.py": {
+      "sha256": "57e292a7b7682cfc02c87500e32f286133de5918ce32bef9b6b05029d4558bc5",
+      "size_bytes": 3475
+    },
+    "src/phase14_6/reporting.py": {
+      "sha256": "b71289f73285b7abb4fb8733b4e98f7d2b065941faa0280e27fa50a2f484ecdc",
+      "size_bytes": 13894
+    },
+    "experiments/phase14_6/audit/trace_provenance_sidecar.json": {
+      "sha256": "2cf3e16b655aabca7ec42593ef7a0fdcfe5072a6bdfb5f38a947dd2e81ad5917",
+      "size_bytes": 825297
+    },
+    "experiments/phase14_6/audit/claim_evidence_ledger.csv": {
+      "sha256": "3a07db34e581230b61b65037ec9521683e5b4fc1050934d1ef14a6fb89fd243f",
+      "size_bytes": 3603
+    },
+    "experiments/phase14_6/tables/table_04_quantization_matrix_remediated.csv": {
+      "sha256": "256b1b29462d5dca1c2d480f44c5adfd37e4591165d6fb6464a02e6ef59101e8",
+      "size_bytes": 454
+    },
+    "experiments/phase14_6/tables/table_12_end_to_end_remediated.csv": {
+      "sha256": "609c9031601d966d8e1dce71401a9417becf9f302560099407e6b81c0e822e71",
+      "size_bytes": 633
+    },
+    "experiments/phase14_6/tables/table_13_statistical_tests_remediated.csv": {
+      "sha256": "71af92da918944307aa7d557484eb8cf8bcace3954bfc36638c8614a10473808",
+      "size_bytes": 406
+    },
+    "experiments/phase14_6/tables/table_14_failures_remediated.csv": {
+      "sha256": "e248b61b96741f4fd3642d3f851e291b0f138b66a4fa417d9df0f89ae090ae8f",
+      "size_bytes": 566
+    },
+    "experiments/phase14_6/figures/figure_01_remediated_suc_comparison.svg": {
+      "sha256": "bdb2de04c29cb95dd82387f863655392f05a5fb06217da742e81801c570ba72f",
+      "size_bytes": 3545
+    },
+    "tests/test_phase14_6_provenance.py": {
+      "sha256": "1ad099a1f5cdebe61199dba443aa82d9f53c22ae26ffc3c162c5a5b91c14b240",
+      "size_bytes": 2507
+    },
+    "tests/test_phase14_6_metrics.py": {
+      "sha256": "27e51d7efb03f52c3fdcad407d1c94eed5da6c15035d83fb67a188d1618a078a",
+      "size_bytes": 3070
+    },
+    "tests/test_phase14_6_statistics.py": {
+      "sha256": "f8cb8ff6ed07579c017171d0d3c18cf5ce35bc92afa20b09c80f2d357d2eb8aa",
+      "size_bytes": 2774
+    },
+    "tests/test_phase14_6_reporting.py": {
+      "sha256": "f464e87cd9a5acfd63bb9bb25cb61a58b6b59075fff0caa6d60c47218846225f",
+      "size_bytes": 2477
+    },
+    "reports/phase14_6/PHASE14_6_INITIAL_RECONNAISSANCE.md": {
+      "sha256": "308db6171b8a89249ebf87b0fec9e778cff74a5983b04ab56c3cdb74da48838c",
+      "size_bytes": 8472
+    },
+    "reports/phase14_6/EXECUTION_PROVENANCE_AUDIT.md": {
+      "sha256": "e0e0764b6301e4d267cfb4fd777286ee8b0636681d53eecb33a87e30b0452a04",
+      "size_bytes": 4316
+    },
+    "reports/phase14_6/SUC_METRIC_REMEDIATION.md": {
+      "sha256": "5fdc9d37f1938e09a2fda241a547ebe7bf2253be94a0e7815da4a9f6b200a284",
+      "size_bytes": 5496
+    },
+    "reports/phase14_6/STATISTICAL_REVALIDATION.md": {
+      "sha256": "2c7a89a219ef282e0c9ff69813f1ef95dcd4c659953e383aec8d1bdca84e0955",
+      "size_bytes": 5724
+    },
+    "reports/phase14_6/7B_FEASIBILITY_CLAIM_AUDIT.md": {
+      "sha256": "56ec5646f2c405b102af24b9a396794c47dc97fdf98d81dee821241528ce2ef7",
+      "size_bytes": 4437
+    },
+    "reports/phase14_6/MANUSCRIPT_CLAIM_ALIGNMENT_REPORT.md": {
+      "sha256": "02d50f5d05b08186e5b525c6c10acdb1e81f3710d445da2a092b1c5556b3933b",
+      "size_bytes": 3463
+    },
+    "reports/phase14_6/FIGURE_TABLE_REGENERATION_REPORT.md": {
+      "sha256": "e6128c9acd7a150b99033833b7e7ca68a6b256a5fc9134f8326c2f637414762c",
+      "size_bytes": 2359
+    },
+    "reports/phase14_6/TEST_AND_REGRESSION_REPORT.md": {
+      "sha256": "5ebb3777cca8480d77912643c912fe91a065b680b81bc2edc3248f4251fcdbbd",
+      "size_bytes": 5112
+    },
+    "reports/phase14_6/MANUSCRIPT_CORRECTION_REGISTER.md": {
+      "sha256": "01bedaa91256f4de4c988a1a464946fe908c48193fbbcec79a9ff891648bdf37",
+      "size_bytes": 5922
+    },
+    "reports/phase14_6/PHASE14_6_MASTER_REPORT.md": {
+      "sha256": "1a81b4d58215ee0dbb9ca327bd6c5c530dc66251bc75e265076355a0e08bf5a4",
+      "size_bytes": 7898
+    },
+    "reports/phase14_6/FINAL_AUDIT.md": {
+      "sha256": "eff7cfb50f453bac0b7edd07ce70389111e3138ed6dbe1ffa5ec2b53ee3d3767",
+      "size_bytes": 5127
+    }
+  }
+}
