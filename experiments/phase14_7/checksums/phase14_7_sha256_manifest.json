@@ -1,0 +1,8 @@
+{
+  "audit/claim_evidence_ledger.csv": "7d5f72b6cec1f537a1ed288de56be22b5a403f04efd0bf18724bfd94e8eee7e7",
+  "figures/grounded_coverage_threshold_sensitivity.svg": "50167ca3bef8bcedb7209bcb9e982b59b4311e1953e46030b252fafa01aed432",
+  "tables/family_level_outcomes.csv": "16f14ec8784bc121a6282733e196705f07d1f062f0a620435a91d8d3dcf9ea84",
+  "tables/family_level_statistical_results.csv": "c46a364847905173a8c988cd64c51423e00b77aed27b7a438d05cf7282cf5398",
+  "tables/threshold_family_effects.csv": "8b7026418124aeea6d2fb9f50bc5886eaefea50947b5cf6b174b2bc994eb492f",
+  "tables/threshold_sensitivity.csv": "c32365b95dd656e12ab3bee0a0ddbb674e2b2f13b54d2080708da5ed3ec26a58"
+}
