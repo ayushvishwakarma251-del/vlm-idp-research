@@ -256,7 +256,7 @@ export default function App() {
         body={
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>
-              Full-document VLM processing consumes 5 pages of context (390 tokens), causing high latency ($7.485\text{ s}$) and visual distraction.
+              Full-document VLM processing consumes 5 pages of context (390 tokens), causing high latency (7.485 s) and visual distraction.
             </p>
             <p>
               Our multimodal retrieval module isolates the <strong>top-2 supporting pages</strong> (156 tokens), cutting context tokens by 60%.
@@ -267,8 +267,8 @@ export default function App() {
               </div>
               <ul style={{ paddingLeft: 20, margin: 0, lineHeight: 1.6 }}>
                 <li>Latency halved from <strong>7.485s down to 3.750s</strong> (49.9% speedup)</li>
-                <li>Extraction Exact Match improved by <strong>+8.36%</strong> ($p = 0.0002$)</li>
-                <li>Strict family cluster bootstrap CI: $[+3.64\%, +13.45\%]$</li>
+                <li>Extraction Exact Match improved by <strong>+8.36%</strong> (p = 0.0002)</li>
+                <li>Strict family cluster bootstrap CI: [+3.64%, +13.45%]</li>
               </ul>
             </div>
           </div>
