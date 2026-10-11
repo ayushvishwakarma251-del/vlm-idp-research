@@ -1,0 +1,59 @@
+/* ===================================================================
+   THEME TOKENS — VLM-IDP Research Deck Theme
+   =================================================================== */
+:root {
+  /* Surfaces */
+  --bg: #070a13;
+  --bg-grad-1: rgba(0, 229, 255, 0.12);
+  --bg-grad-2: rgba(56, 239, 125, 0.08);
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.075);
+
+  /* Ink */
+  --fg: #f8fafc;
+  --fg-muted: #94a3b8;
+  --fg-faint: #64748b;
+
+  /* Hairlines */
+  --hair: rgba(255, 255, 255, 0.12);
+  --hair-2: rgba(255, 255, 255, 0.06);
+
+  /* Accent — Electric Cyan & Emerald Deep Tech Gradient */
+  --primary: #00e5ff;
+  --accent: linear-gradient(
+    115deg,
+    #00e5ff 0%,
+    #38ef7d 55%,
+    #11998e 100%
+  );
+  --accent-ink: #031017;
+
+  /* Radius */
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 26px;
+
+  /* Depth */
+  --shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.85);
+  --glow: 0 20px 60px -20px rgba(0, 229, 255, 0.45);
+
+  /* Type */
+  --font-head: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Motion */
+  --dur: 0.4s;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Atmosphere */
+  --grain: 0.035;
+  --vignette: rgba(0, 0, 0, 0.25);
+
+  /* Responsive gutter — fluid side / vertical padding */
+  --gutter: clamp(28px, 6vw, 120px);
+  --gutter-y: clamp(40px, 8vh, 96px);
+}

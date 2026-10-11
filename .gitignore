@@ -20,6 +20,8 @@ ENV/
 .env.bak
 lib/
 lib64/
+node_modules/
+**/node_modules/
 
 # Distribution / Packaging
 .installed.cfg
