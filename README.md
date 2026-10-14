@@ -8,7 +8,7 @@
 [![Tests](https://img.shields.io/badge/Pytest-439%20Passed%20(100%25)-success?logo=pytest&logoColor=white)](https://github.com/officialayush5839-arch/vlm-idp-research)
 [![Integrity](https://img.shields.io/badge/Audit-Zero%20Fabrication%20Verified-blueviolet)](reports/phase14/FINAL_AUDIT.md)
 [![License](https://img.shields.io/badge/License-MIT%20%2F%20Research-blue.svg)](LICENSE)
-[![Interactive 3D Showcase](https://img.shields.io/badge/Live%20Showcase-3D%20Interactive%20Web-brightgreen?logo=three.js&logoColor=white)](https://officialayush5839-arch.github.io/vlm-idp-research/)
+[![Viva & Defense Handbook](https://img.shields.io/badge/Viva%20Handbook-Comprehensive%20Defense-orange?logo=readme&logoColor=white)](docs/PROJECT_VIVA_AND_RESEARCH_DEFENSE_HANDBOOK.md)
 
 <br/>
 
@@ -24,21 +24,23 @@
 
 **An IEEE-Grade Research Framework for Adaptive, Uncertainty-Aware, and Evidence-Grounded Document Intelligence**
 
-[📑 **Document Classification Architecture**](CLASSIFICATION.md) · [🌟 **Interactive 3D Web Showcase**](https://officialayush5839-arch.github.io/vlm-idp-research/) · [📊 **Empirical Tables**](experiments/phase14/tables/) · [📈 **Publication Figures**](experiments/phase14/figures/) · [📑 **Phase 14 Report**](reports/phase14/PHASE14_REPORT.md) · [📝 **IEEE Integration**](reports/phase14/IEEE_INTEGRATION.md)
+[📑 **Document Classification Architecture**](CLASSIFICATION.md) · [🎓 **Project Viva & Research Defense Handbook**](docs/PROJECT_VIVA_AND_RESEARCH_DEFENSE_HANDBOOK.md) · [📊 **Empirical Tables**](experiments/phase14/tables/) · [📈 **Publication Figures**](experiments/phase14/figures/) · [📑 **Phase 14 Report**](reports/phase14/PHASE14_REPORT.md) · [📝 **IEEE Integration**](reports/phase14/IEEE_INTEGRATION.md)
 
 </div>
 
 ---
 
-## 🌟 Interactive 3D Web Experience
+## 🎓 Project Viva & Research Defense
 
-Explore the entire document intelligence architecture in real-time 3D powered by **Three.js**, **WebGL GLSL shaders**, and **Apple-style Liquid Glass UI components**:
-👉 **[Launch Live 3D Web Showcase](https://officialayush5839-arch.github.io/vlm-idp-research/)** *(Hosted via GitHub Pages from `docs/index.html`)*
+A comprehensive, evidence-based viva preparation, teacher Q&A, and technical defense guide for students, project guides, internal/external evaluators, and IEEE peer reviewers:
 
-- **Scroll-Driven 3D Mechanics**: Multi-page translucent document stacks dynamically tilt, rotate, and zoom along an orbital camera trajectory as you scroll.
-- **Real-Time WebGL Shaders**: Procedural Simplex noise background with live chromatic aberration and fluid wavefront distortion.
-- **3D Spatial Evidence Grounding**: Holographic 3D bounding boxes lock onto verified visual target patches.
-- **Live HUD Controls**: Real-time degradation simulation slider and physical precision (INT4/INT8/FP16) VRAM meters.
+👉 **[Project Viva & Research Defense Handbook](docs/PROJECT_VIVA_AND_RESEARCH_DEFENSE_HANDBOOK.md)**
+
+- **20 Comprehensive Sections:** Complete coverage spanning basic AI/ML/VLM foundations, problem definition, system architecture, tech stack, datasets, baselines, phase-by-phase history, mathematical formulas, and statistical validity.
+- **Audited Empirical Truth:** Rigorous demarcation between physical GPU microbenchmarks (`SmolVLM-500M INT4` in 530.95 MB VRAM) and calibrated trace simulation.
+- **Remediated Grounded SUC:** Transparent analysis of historical metric coupling and verified $+70.91\text{ pp}$ gain under spatial verification ($\tau = 0.50$).
+- **45 Difficult Cross-Examinations:** Exhaustive preparation covering failure cases, negative findings (H2, H9, H10, H10.5, H11), and adversarial challenges.
+- **3 Mock Viva Simulations:** Specialized Q&A tracks for university teachers, technical ML juries, and skeptical research reviewers.
 
 ---
 
