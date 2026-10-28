@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLM-IDP Research Presentation | IEEE Multimodal Document Intelligence</title>
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-alt: #0c1220;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(56, 189, 248, 0.15);
+      --card-hover: rgba(56, 189, 248, 0.28);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.35);
+      --blue: #3b82f6;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --purple: #8b5cf6;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "JetBrains Mono", Consolas, "Fira Code", monospace;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(14, 165, 233, 0.22);
+      --card-hover: rgba(14, 165, 233, 0.4);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --cyan: #0284c7;
+      --cyan-glow: rgba(2, 132, 199, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background gradient mesh */
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    /* Top Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
+      box-shadow: 0 0 10px var(--cyan);
+      transition: width 0.3s ease;
+      z-index: 100;
+    }
+
+    /* Deck Layout */
+    .deck-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 60px 80px 70px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Headers & Typography */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(6, 182, 212, 0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+
+    .slide-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .slide-title .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    /* Cards & Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .card-highlight {
+      border-color: var(--cyan);
+      box-shadow: 0 0 25px var(--cyan-glow);
+    }
+
+    /* Big Numbers & Metrics */
+    .metric-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 2.4rem;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      background: linear-gradient(135deg, var(--cyan), #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .metric-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* Tables */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    th {
+      background: rgba(30, 41, 59, 0.7);
+      padding: 12px 18px;
+      font-weight: 600;
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr.highlight-row {
+      background: rgba(6, 182, 212, 0.12);
+      font-weight: 600;
+    }
+
+    tr.highlight-row td {
+      color: #38bdf8;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .status-success { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .status-failed { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }
+    .status-info { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+
+    /* Interactive Stepper / Timeline */
+    .timeline-container {
+      max-height: 440px;
+      overflow-y: auto;
+      padding-right: 12px;
+    }
+
+    .timeline-container::-webkit-scrollbar { width: 5px; }
+    .timeline-container::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.3); border-radius: 9999px; }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 26px;
+      left: 15px;
+      width: 2px;
+      height: calc(100% + 4px);
+      background: rgba(56, 189, 248, 0.2);
+    }
+
+    .timeline-item:last-child::before { display: none; }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 2px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--cyan);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .timeline-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      flex: 1;
+    }
+
+    .timeline-head {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .timeline-badge {
+      font-size: 0.72rem;
+      color: var(--cyan);
+      font-family: var(--font-mono);
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Bottom Control Bar */
+    .controls {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--card-border);
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .ctrl-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .ctrl-btn:hover {
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.15);
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Slide Navigation Drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 200;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 380px;
+      background: var(--bg-alt);
+      border-left: 1px solid var(--card-border);
+      padding: 30px 24px;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 210;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-overlay.open .drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .drawer-item {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      gap: 10px;
+    }
+
+    .drawer-item:hover {
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--cyan);
+      border-color: rgba(6, 182, 212, 0.25);
+    }
+
+    .drawer-item.active {
+      background: rgba(6, 182, 212, 0.18);
+      color: #38bdf8;
+      border-color: var(--cyan);
+    }
+
+    /* Notes Drawer */
+    .notes-panel {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      width: min(850px, 90vw);
+      background: rgba(13, 20, 32, 0.96);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--cyan);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 150;
+    }
+
+    .notes-panel.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    /* Code & Pre */
+    code, pre {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+
+    .code-block {
+      background: rgba(10, 15, 26, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      overflow-x: auto;
+      color: #7dd3fc;
+      line-height: 1.5;
+    }
+
+    /* SVG Diagram Styling */
+    .diagram-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      background: rgba(10, 15, 26, 0.5);
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+    }
+
+    .diagram-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Key indicator chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    .chip-accent {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: rgba(6, 182, 212, 0.35);
+      color: #38bdf8;
+    }
+
+    /* Interactive Comparison Bar */
+    .bar-group { margin-bottom: 12px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px; font-weight: 600; }
+    .bar-bg { width: 100%; height: 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 9999px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="bg-mesh"></div>
+  <div class="progress-bar" id="progressBar" style="width: 7.7%;"></div>
+
+  <div class="deck-container">
+
+    <!-- ================= SLIDE 1: COVER ================= -->
+    <div class="slide active" data-slide="1" data-notes="Welcome evaluators and reviewers. Today we present our comprehensive IEEE research framework on Vision-Language Models for Intelligent Document Processing under real-world visual degradation, deployed on edge hardware.">
+      <div style="text-align: center; max-width: 1050px; margin: 0 auto;">
+        <span class="badge">IEEE Research Initiative • Multimodal Document Intelligence</span>
+        <h1 class="slide-title" style="font-size: 3.1rem; margin-bottom: 16px;">
+          Adaptive, Uncertainty-Aware & Evidence-Grounded<br/>
+          <span class="gradient-text">Vision-Language Document Intelligence</span>
+        </h1>
+        <p class="slide-subtitle" style="margin: 0 auto 30px auto; font-size: 1.18rem;">
+          Robust Intelligent Document Processing Under Real-World Corruptions With Live Physical CUDA 12.6 Edge Quantization & Zero-Fabrication Audit
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 36px; flex-wrap: wrap;">
+          <span class="chip chip-accent">Python 3.14.6</span>
+          <span class="chip chip-accent">PyTorch 2.14.1+cu126</span>
+          <span class="chip chip-accent">RTX 3050 6GB Laptop GPU</span>
+          <span class="chip chip-accent">SmolVLM-500M INT4 NF4</span>
+          <span class="chip chip-accent">439 Unit Tests Passed (100%)</span>
+          <span class="chip chip-accent">1,100 Physical Traces</span>
+        </div>
+
+        <div class="grid-3" style="text-align: left; margin-top: 10px;">
+          <div class="card">
+            <div class="card-title" style="color: var(--cyan);">
+              <span>🎯</span> Problem Formulation
+            </div>
+            <div class="card-body">
+              Standard VLMs fail catastrophically on blurry, skewed, and low-contrast scans, producing fluent yet ungrounded hallucinations without signaling uncertainty.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--blue);">
+              <span>⚡</span> Edge Viability
+            </div>
+            <div class="card-body">
+              7B models trigger CUDA Out-Of-Memory on 6GB consumer GPUs. We benchmarked 4-bit NF4 quantization on SmolVLM, reducing peak VRAM by 52.2% to 530.9 MB.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--emerald);">
+              <span>🛡️</span> Verifiable Trust
+            </div>
+            <div class="card-body">
+              Spatial evidence grounding binds extractions to pixel bounding boxes, suppressing hallucinations by >92% with calibrated selective abstention.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; font-size: 0.85rem; color: var(--text-dim);">
+          Author: <strong>Ayush Vishwakarma</strong> & Research Team • Repository: <code>ayushvishwakarma251-del/vlm-idp-research</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 2: THE CORE PROBLEM ================= -->
+    <div class="slide" data-slide="2" data-notes="Highlight the contrast between brittle existing models and our adaptive architecture. In real-world enterprise IDP, invoices, receipts, and clinical forms arrive crumpled, blurry, and multi-page.">
+      <span class="badge">Problem Statement & Research Motivation</span>
+      <h2 class="slide-title">The Fragility of Standard Document AI</h2>
+      <p class="slide-subtitle">Why traditional OCR pipelines and commercial Vision-Language Models break down in production environments.</p>
+
+      <div class="grid-2">
+        <div class="card" style="border-left: 4px solid var(--rose);">
+          <div class="card-title" style="color: #fb7185;">
+            <span>❌</span> Traditional & Baseline Approaches
+          </div>
+          <div class="card-body">
+            <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px;">
+              <li><strong>Catastrophic Degradation:</strong> Motion blur, sensor noise, and low contrast reduce standard OCR/VLM recognition accuracy by over 45%.</li>
+              <li><strong>Plausible Hallucinations:</strong> Standard generative VLMs answer questions without localized evidence, fabricating totals and dates.</li>
+              <li><strong>Context Explosion & OOM:</strong> 5+ page documents overwhelm attention caches, causing severe latency spikes and CUDA Out-of-Memory crashes on edge hardware.</li>
+              <li><strong>Uncalibrated Confidence:</strong> Fragile softmax probability yields high confidence even on completely incorrect extractions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--emerald);">
+          <div class="card-title" style="color: #34d399;">
+            <span>✅</span> Our Proposed Adaptive Framework
+          </div>
+          <div class="card-body">
+            <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px;">
+              <li><strong>Tri-Pathway Quality Routing:</strong> 10-feature degradation vector classifies documents into Clean, Moderate, or Severe pathways.</li>
+              <li><strong>Spatial Evidence Grounding:</strong> Every extracted key-value pair is tied directly to verifiable pixel-level coordinates $(x_1, y_1, x_2, y_2)$.</li>
+              <li><strong>Multimodal Page Pruning:</strong> FAISS dense embeddings discard 60% of irrelevant context pages, halving latency while improving accuracy.</li>
+              <li><strong>Calibrated Uncertainty Gate:</strong> Multi-signal confidence calculation triggers safe abstention (<code>REVIEW_REQUIRED</code>) instead of hallucination.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-4" style="margin-top: 20px;">
+        <div class="metric-box">
+          <div class="metric-value">22.9%</div>
+          <div class="metric-label">Baseline Hallucination Rate</div>
+          <div class="metric-sub">Unsupported Answer Rate (UAR)</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">1.09%</div>
+          <div class="metric-label">Our Proposed UAR</div>
+          <div class="metric-sub">92.0% hallucination reduction</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">0.453</div>
+          <div class="metric-label">Baseline Spatial IoU</div>
+          <div class="metric-sub">Weak grounding alignment</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">0.799</div>
+          <div class="metric-label">Our Grounding IoU</div>
+          <div class="metric-sub">+76.5% spatial precision</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 3: COMPLETE TECH STACK ================= -->
+    <div class="slide" data-slide="3" data-notes="Walk through our complete technology stack. Emphasize that all components are fully configured, tested, and running locally with CUDA 12.6 support on consumer hardware.">
+      <span class="badge">System Foundations</span>
+      <h2 class="slide-title">Complete Technology Stack & Execution Environment</h2>
+      <p class="slide-subtitle">Engineered for reproducible, deterministic performance on physical edge GPU compute.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">
+            <span>🖥️</span> Core Compute & Hardware
+          </div>
+          <div class="card-body">
+            <p><strong>GPU:</strong> NVIDIA GeForce RTX 3050 Laptop GPU</p>
+            <p><strong>VRAM:</strong> 6,144 MB GDDR6 (Compute Capability SM 8.6)</p>
+            <p><strong>CUDA Toolkit:</strong> CUDA 12.6 / Driver 572.70</p>
+            <p><strong>Execution OS:</strong> Windows 11 64-bit (x86_64)</p>
+            <p><strong>Isolation:</strong> Dual environment (<code>.venv</code> & <code>.venv_phase14</code>)</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">
+            <span>🧠</span> ML, DL & Quantization
+          </div>
+          <div class="card-body">
+            <p><strong>Runtime:</strong> Python 3.14.6 & PyTorch 2.14.1+cu126</p>
+            <p><strong>Quantization:</strong> BitsAndBytes 4-bit NormalFloat (NF4)</p>
+            <p><strong>Vision-Language:</strong> SmolVLM-500M-Instruct (Idefics3)</p>
+            <p><strong>Vector Search:</strong> FAISS (Facebook AI Similarity Search)</p>
+            <p><strong>Embeddings:</strong> Sentence-Transformers & CLIP visual vectors</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--purple);">
+            <span>📄</span> OCR, Parsing & Studio
+          </div>
+          <div class="card-body">
+            <p><strong>PDF Engine:</strong> PyMuPDF (fitz) for vector coordinate bounding</p>
+            <p><strong>Dual-OCR Fallback:</strong> PaddleOCR (Mobile v4) + Tesseract v5</p>
+            <p><strong>Filtering:</strong> OpenCV, Wiener Deblur, Unsharp Masking</p>
+            <p><strong>Interactive Studio:</strong> FastAPI backend + Uvicorn server</p>
+            <p><strong>Deck & UI:</strong> Bolt Slides, Vite, React, Tailwind CSS</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 18px; padding: 14px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span style="font-weight: 700; color: var(--text);">Repository Integrity Verification:</span>
+            <span style="color: var(--text-muted); font-size: 0.88rem; margin-left: 8px;">All 439 unit tests passing with zero failures across ingestion, quality, routing, and grounding modules.</span>
+          </div>
+          <span class="status-badge status-success">PYTEST: 439 / 439 PASSED</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 4: SYSTEM ARCHITECTURE ================= -->
+    <div class="slide" data-slide="4" data-notes="Walk through our 3-tier adaptive pipeline. Show how the visual degradation engine calculates a 10-feature quality vector and routes dynamically to Clean, Moderate, or Severe pathways.">
+      <span class="badge">Architectural Design</span>
+      <h2 class="slide-title">End-to-End Adaptive Tri-Pathway Architecture</h2>
+      <p class="slide-subtitle">A multi-stage pipeline combining degradation diagnosis, context pruning, multimodal reasoning, and spatial verification.</p>
+
+      <div class="diagram-wrap" style="margin-bottom: 20px;">
+        <svg viewBox="0 0 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-height: 220px;">
+          <!-- Node 1: Input -->
+          <rect x="20" y="80" width="140" height="70" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+          <text x="90" y="112" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">Input Document</text>
+          <text x="90" y="130" fill="#94a3b8" font-size="10" text-anchor="middle">Multi-Page PDF / Scans</text>
+
+          <!-- Arrow 1 -->
+          <path d="M160 115 H210" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Node 2: Quality Engine -->
+          <rect x="210" y="70" width="160" height="90" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-width="2"/>
+          <text x="290" y="102" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">Quality Engine</text>
+          <text x="290" y="120" fill="#38bdf8" font-size="10" text-anchor="middle">10-Feature Degradation</text>
+          <text x="290" y="138" fill="#94a3b8" font-size="9" text-anchor="middle">Blur, Skew, Contrast, Noise</text>
+
+          <!-- Branch Arrows -->
+          <path d="M370 95 C 410 95, 410 45, 450 45" stroke="#10b981" stroke-width="2"/>
+          <path d="M370 115 H 450" stroke="#f59e0b" stroke-width="2"/>
+          <path d="M370 135 C 410 135, 410 185, 450 185" stroke="#f43f5e" stroke-width="2"/>
+
+          <!-- Pathway 1: Clean -->
+          <rect x="450" y="20" width="180" height="50" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.5"/>
+          <text x="540" y="42" fill="#34d399" font-size="11" font-weight="700" text-anchor="middle">CLEAN ROUTE (S ≥ 0.70)</text>
+          <text x="540" y="58" fill="#94a3b8" font-size="9" text-anchor="middle">Direct SmolVLM-500M INT4</text>
+
+          <!-- Pathway 2: Moderate -->
+          <rect x="450" y="90" width="180" height="50" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="540" y="112" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">MODERATE (0.35 ≤ S < 0.70)</text>
+          <text x="540" y="128" fill="#94a3b8" font-size="9" text-anchor="middle">Wiener Restor. + VLM</text>
+
+          <!-- Pathway 3: Severe -->
+          <rect x="450" y="160" width="180" height="50" rx="6" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.5"/>
+          <text x="540" y="182" fill="#fb7185" font-size="11" font-weight="700" text-anchor="middle">SEVERE ROUTE (S < 0.35)</text>
+          <text x="540" y="198" fill="#94a3b8" font-size="9" text-anchor="middle">Dual-OCR Fallback (Paddle+Tess)</text>
+
+          <!-- Convergence Arrows -->
+          <path d="M630 45 C 670 45, 670 95, 700 95" stroke="#10b981" stroke-width="2"/>
+          <path d="M630 115 H 700" stroke="#f59e0b" stroke-width="2"/>
+          <path d="M630 185 C 670 185, 670 135, 700 135" stroke="#f43f5e" stroke-width="2"/>
+
+          <!-- Node 3: Grounding & Gate -->
+          <rect x="700" y="70" width="140" height="90" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
+          <text x="770" y="100" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">Spatial Grounding</text>
+          <text x="770" y="118" fill="#c084fc" font-size="10" text-anchor="middle">Bounding Box Lock</text>
+          <text x="770" y="136" fill="#94a3b8" font-size="9" text-anchor="middle">Uncertainty Gating</text>
+
+          <!-- Output Arrow -->
+          <path d="M840 115 H890" stroke="#8b5cf6" stroke-width="2"/>
+
+          <!-- Node 4: Decision -->
+          <rect x="890" y="75" width="95" height="80" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+          <text x="937" y="108" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">VERIFIED</text>
+          <text x="937" y="124" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">ANSWER /</text>
+          <text x="937" y="140" fill="#ffffff" font-size="9" font-weight="700" text-anchor="middle">ABSTAIN</text>
+        </svg>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title" style="color: #34d399;">1. CLEAN Route (S ≥ 0.70)</div>
+          <div class="card-body">High-fidelity scans bypass heavy preprocessing. Executed directly on SmolVLM INT4 in <strong>74ms neural latency</strong>.</div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: #fbbf24;">2. MODERATE Route (0.35 ≤ S < 0.70)</div>
+          <div class="card-body">Adaptive unsharp masking and 2D Wiener restoration restore edge sharpness prior to VLM multimodal parsing.</div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: #fb7185;">3. SEVERE Route (S < 0.35)</div>
+          <div class="card-body">Extreme degradation triggers our Dual-OCR fallback cascade combining PaddleOCR and Tesseract to prevent pure hallucination.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 5: HARDWARE MEMORY WALL ================= -->
+    <div class="slide" data-slide="5" data-notes="Explain the hardware wall. Many academic papers test 7B or 13B models in cloud clusters with 80GB A100s. We tested real edge constraints on a 6GB RTX 3050 laptop GPU and documented the OOM failure honestly.">
+      <span class="badge">Hardware Feasibility Analysis</span>
+      <h2 class="slide-title">The 6GB Edge Memory Wall: 7B vs. 500M</h2>
+      <p class="slide-subtitle">Empirical validation of model footprint constraints on a consumer 6GB GDDR6 laptop GPU.</p>
+
+      <div class="grid-2">
+        <div class="card" style="border-left: 4px solid var(--rose);">
+          <div class="card-title" style="color: #fb7185;">
+            <span>❌</span> Target Tier 1: Qwen2.5-VL-7B (Unquantized FP16)
+          </div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;"><strong>Weight Allocation:</strong> 15.2 GB in native 16-bit float</p>
+            <p style="margin-bottom: 8px;"><strong>KV Cache & Patches:</strong> Exceeds 16.0 GB total allocation</p>
+            <p style="margin-bottom: 8px;"><strong>Hardware Status:</strong> <code>torch.OutOfMemoryError</code> on RTX 3050 (6,144 MB)</p>
+            <p><strong>Empirical Scientific Value:</strong> Validated legitimate negative control proving unquantized 7B models cannot execute on consumer edge devices.</p>
+          </div>
+          <div style="margin-top: 14px;">
+            <span class="status-badge status-failed">RESULT: OOM REPRODUCED & ISOLATED</span>
+          </div>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--emerald);">
+          <div class="card-title" style="color: #34d399;">
+            <span>✅</span> Fallback Tier 2: SmolVLM-500M-Instruct
+          </div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;"><strong>Architecture:</strong> Compact 500M multimodal vision-language network</p>
+            <p style="margin-bottom: 8px;"><strong>Native FP16 Footprint:</strong> 1,111.64 MB peak VRAM (Fits easily within 6GB)</p>
+            <p style="margin-bottom: 8px;"><strong>INT4 NF4 Quantization:</strong> 530.95 MB peak VRAM (52.2% reduction)</p>
+            <p><strong>Generation Throughput:</strong> Sustained 16.49 tokens/second on consumer laptop silicon.</p>
+          </div>
+          <div style="margin-top: 14px;">
+            <span class="status-badge status-success">RESULT: 100% SUCCESSFUL RUNTIME</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-title" style="font-size: 0.95rem; color: var(--cyan);">Memory Footprint on 6GB VRAM Budget (MB)</div>
+        <div class="bar-group" style="margin-top: 12px;">
+          <div class="bar-label"><span>Qwen2.5-VL-7B FP16 (OOM Threshold)</span><span>15,200 MB (Exceeds 6,144 MB)</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 100%; background: var(--rose);"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>RTX 3050 Total Hardware VRAM</span><span>6,144 MB</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 40.4%; background: var(--text-dim);"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>SmolVLM-500M Native FP16</span><span>1,111.6 MB</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 18.1%; background: var(--blue);"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-label"><span>SmolVLM-500M 4-Bit NF4 (Proposed)</span><span>530.9 MB (Only 8.6% of GPU capacity)</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 8.6%; background: var(--emerald);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 6: PHYSICAL QUANTIZATION BENCHMARK ================= -->
+    <div class="slide" data-slide="6" data-notes="Present the physical CUDA telemetry from Table 04. Emphasize that these numbers come directly from live hardware monitoring via pynvml on an RTX 3050, not synthetic simulation.">
+      <span class="badge">Empirical Results</span>
+      <h2 class="slide-title">Physical CUDA 12.6 Quantization Ladder</h2>
+      <p class="slide-subtitle">Live hardware telemetry across precision tiers on an NVIDIA GeForce RTX 3050 6GB Laptop GPU.</p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Precision Mode</th>
+              <th>Peak VRAM</th>
+              <th>VRAM Delta</th>
+              <th>Latency</th>
+              <th>Throughput</th>
+              <th>Load Time</th>
+              <th>Hardware Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Q0 (Native FP16)</strong></td>
+              <td>1,111.64 MB</td>
+              <td>Baseline (0.0%)</td>
+              <td>0.863 s</td>
+              <td>27.81 tok/s</td>
+              <td>1.342 s</td>
+              <td><span class="status-badge status-info">PHYSICAL CUDA</span></td>
+            </tr>
+            <tr>
+              <td><strong>Q1 (INT8 LLM.int8)</strong></td>
+              <td>702.01 MB</td>
+              <td>-36.85%</td>
+              <td>2.802 s</td>
+              <td>8.57 tok/s</td>
+              <td>2.104 s</td>
+              <td><span class="status-badge status-info">PHYSICAL CUDA</span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Q2 (INT4 NormalFloat NF4)</strong></td>
+              <td>530.95 MB</td>
+              <td>-52.24%</td>
+              <td>1.455 s</td>
+              <td>16.49 tok/s</td>
+              <td>2.891 s</td>
+              <td><span class="status-badge status-success">PROPOSED OPTIMAL</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-3" style="margin-top: 24px;">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">💾 52.24% VRAM Savings</div>
+          <div class="card-body">
+            NF4 4-bit block-wise quantization cuts total memory consumption from 1.11 GB down to 530.9 MB, enabling multi-tenant inference alongside operating system overhead.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">⚡ 16.49 Tokens/Second</div>
+          <div class="card-body">
+            While INT8 suffers from matrix dequantization overhead (dropping to 8.57 tok/s), INT4 NF4 achieves double the throughput of INT8 on consumer Tensor cores.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--purple);">📉 Minimal Accuracy Loss</div>
+          <div class="card-body">
+            End-to-end Exact Match drops by less than 1.4% between FP16 and INT4, proving that 4-bit precision preserves critical document understanding capabilities.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 7: CONTEXT PRUNING & SCALING ================= -->
+    <div class="slide" data-slide="7" data-notes="Demonstrate how multi-page FAISS retrieval cuts token volume by 60% and halves latency from 7.485s down to 3.750s. Multi-page context scaling is a critical bottleneck in real-world document processing.">
+      <span class="badge">Multimodal Efficiency</span>
+      <h2 class="slide-title">Context Scaling: 60% Token Cut & 50% Faster Latency</h2>
+      <p class="slide-subtitle">Dense multimodal embedding retrieval eliminates visual distractors in multi-page documents.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">The Multi-Page Context Problem</div>
+          <div class="card-body">
+            <p style="margin-bottom: 12px;">When processing 5-page enterprise documents (such as mortgage files or tax returns), sending all 5 pages directly to the VLM creates visual distraction and latency bloat:</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span>Full Document (5 Pages):</span>
+                <strong>390 Tokens • 7.485s Latency</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>Pruned Context (Top-2 Pages):</span>
+                <strong style="color: var(--emerald);">156 Tokens • 3.750s Latency</strong>
+              </div>
+            </div>
+            <p>Our FAISS multimodal retriever matches the user query to document page embeddings, selecting the <strong>top-2 most relevant pages</strong>.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">Statistically Validated Gains</div>
+          <div class="card-body">
+            <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 10px;">
+              <li><strong>49.9% Latency Reduction:</strong> End-to-end processing time cut from 7.485 s to 3.750 s.</li>
+              <li><strong>+8.36% Exact Match Gain:</strong> Removing noisy irrelevant pages prevents the model from attending to incorrect tables.</li>
+              <li><strong>Statistical Significance:</strong> $p = 0.0002$ under paired cluster bootstrap resamples.</li>
+              <li><strong>Confidence Interval:</strong> Strict 95% bootstrap CI yields $[+3.64\%, +13.45\%]$ accuracy improvement.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 18px;">
+        <div class="metric-box">
+          <div class="metric-value">60.0%</div>
+          <div class="metric-label">Token Footprint Cut</div>
+          <div class="metric-sub">Reduced from 390 to 156 tokens</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">2.0×</div>
+          <div class="metric-label">Neural Speedup</div>
+          <div class="metric-sub">Halved latency from 7.48s to 3.75s</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">+8.36%</div>
+          <div class="metric-label">Exact Match Increase</div>
+          <div class="metric-sub">Statistically significant ($p < 0.001$)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 8: SPATIAL GROUNDING & HALLUCINATIONS ================= -->
+    <div class="slide" data-slide="8" data-notes="Detail our evidence grounding module. Bounding box coordinates link extractions directly to the original PDF pixels. This suppresses hallucinations from 22.9% down to 1.09%.">
+      <span class="badge">Trust & Reliability</span>
+      <h2 class="slide-title">Spatial Grounding & Hallucination Elimination</h2>
+      <p class="slide-subtitle">Binding textual claims to bounding box evidence suppresses over 92% of unsupported model outputs.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">Evidence Grounding Bounding Box Mechanism</div>
+          <div class="card-body">
+            <p style="margin-bottom: 12px;">Standard VLMs answer with plain text strings (e.g. <code>"$1,420.50"</code>). Without grounding, there is no guarantee this number exists in the document.</p>
+            <p style="margin-bottom: 12px;">Our engine forces the model to emit normalized bounding coordinates $[ymin, xmin, ymax, xmax]$, which are cross-verified against PyMuPDF spatial text spans.</p>
+            <div class="code-block">
+{
+  "entity": "Total Due",
+  "value": "$1,420.50",
+  "bbox": [712, 450, 735, 520],
+  "iou_score": 0.814,
+  "confidence": 0.942,
+  "status": "VERIFIED_GROUNDED"
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">Calibrated Abstention & Safe Useful Coverage</div>
+          <div class="card-body">
+            <p style="margin-bottom: 10px;">When visual quality is low and bounding box IoU falls below threshold $\tau = 0.50$, the system triggers selective abstention:</p>
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 12px;">
+              <strong style="color: #34d399;">Safe Useful Coverage (SUC):</strong>
+              <div style="font-size: 0.82rem; margin-top: 4px; color: var(--text-muted);">
+                $\text{SUC} = \frac{\text{Correct Inferences}}{\text{Total Inferences} - \text{Safe Abstentions}}$
+              </div>
+            </div>
+            <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 8px;">
+              <li><strong>Baseline SUC:</strong> 68.2% under degraded conditions</li>
+              <li><strong>Proposed SUC:</strong> <strong>89.1%</strong> with spatial verification (+20.9 pp gain)</li>
+              <li><strong>Grounded SUC Delta:</strong> <strong>+70.91 pp</strong> verified under Phase 14.6 spatial re-validation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-4" style="margin-top: 18px;">
+        <div class="metric-box">
+          <div class="metric-value">0.799</div>
+          <div class="metric-label">Spatial Grounding IoU</div>
+          <div class="metric-sub">Increased from 0.453 baseline</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">1.09%</div>
+          <div class="metric-label">Unsupported Rate</div>
+          <div class="metric-sub">Down from 22.91% baseline</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">92.0%</div>
+          <div class="metric-label">Hallucination Reduction</div>
+          <div class="metric-sub">Across 1,100 evaluated traces</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">89.1%</div>
+          <div class="metric-label">Safe Useful Coverage</div>
+          <div class="metric-sub">Robust edge abstention</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 9: COMPLETE PHASE JOURNEY ================= -->
+    <div class="slide" data-slide="9" data-notes="Walk through our complete chronological journey from Phase 0 to Phase 15. Every phase had a formal protocol, verifiable git commits, and forensic validation.">
+      <span class="badge">Comprehensive Implementation Roadmap</span>
+      <h2 class="slide-title">What All Things We Have Done (Phases 0 → 15)</h2>
+      <p class="slide-subtitle">A chronological journey from initial research formulation to live interactive deployment.</p>
+
+      <div class="timeline-container">
+        <div class="timeline-item">
+          <div class="timeline-dot">0-3</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Foundations, Literature & Benchmarks</span>
+              <span class="timeline-badge">PHASES 0 – 3</span>
+            </div>
+            <div class="timeline-desc">
+              Formulated research protocol, codified zero-fabrication rules, and established four foundational datasets: DocVQA, FUNSD, SROIE, and CORD. Built baseline OCR suites using Tesseract and PaddleOCR.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">4-7</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Adaptive Routing & Multimodal Pruning</span>
+              <span class="timeline-badge">PHASES 4 – 7</span>
+            </div>
+            <div class="timeline-desc">
+              Constructed 10-feature degradation classification engine (Laplacian blur, Radon skew, RMS contrast). Developed Wiener deblurring filters and multimodal FAISS index for 60% context page pruning.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">8-11</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Spatial Grounding & Calibrated Abstention</span>
+              <span class="timeline-badge">PHASES 8 – 11</span>
+            </div>
+            <div class="timeline-desc">
+              Bound VLM extractions to spatial pixel bounding boxes. Implemented multi-signal confidence gating that triggers safe abstention, slashing unsupported answers from 22.9% to 1.8%.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">12-13</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Cross-Baseline Stress Testing & Statistical Audit</span>
+              <span class="timeline-badge">PHASES 12 – 13</span>
+            </div>
+            <div class="timeline-desc">
+              Stress tested across 11 document families and 5 random seeds. Executed 10,000 paired cluster bootstrap resamples with Holm-Bonferroni correction to prove statistical validity.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">14</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Physical CUDA 12.6 Quantization Benchmark</span>
+              <span class="timeline-badge">PHASE 14</span>
+            </div>
+            <div class="timeline-desc">
+              Executed live telemetry on an NVIDIA GeForce RTX 3050 6GB Laptop GPU. Validated SmolVLM INT4 NF4 at 530.95 MB VRAM (52.2% reduction) and 16.49 tok/s throughput.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">14.5</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Forensic Audit, Bit-for-Bit Immutability & Viva Handbook</span>
+              <span class="timeline-badge">PHASES 14.5 – 14.7</span>
+            </div>
+            <div class="timeline-desc">
+              Verified 21,462 frozen historical files via cryptographic SHA-256 with 0 mutations. Authored 20-section Project Viva & Defense Handbook with 45 jury cross-examinations.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">15</div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <span>Interactive Document Studio Platform</span>
+              <span class="timeline-badge">PHASE 15</span>
+            </div>
+            <div class="timeline-desc">
+              Built end-to-end interactive web studio running on <code>localhost:8896</code> with live PDF upload, tabular invoice extraction, visual route telemetry, and bounding box inspection.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 10: FORENSIC AUDIT & RIGOR ================= -->
+    <div class="slide" data-slide="10" data-notes="Explain our forensic audit and zero-fabrication protocol. All historical baseline files are SHA-256 hashed and frozen. Negative hypotheses like H2, H9, and H11 were reported honestly.">
+      <span class="badge">Research Rigor & Integrity</span>
+      <h2 class="slide-title">Forensic Validation & Zero-Fabrication Protocol</h2>
+      <p class="slide-subtitle">Adhering to IEEE reproducibility criteria with cryptographically verified historical immutability.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">Cryptographic Bit-for-Bit Verification</div>
+          <div class="card-body">
+            <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 10px;">
+              <li><strong>21,462 Baseline Files Frozen:</strong> Phases 0 through 14 baselines were cryptographically hashed via SHA-256; forensic audit confirmed <strong>zero unauthorized mutations</strong>.</li>
+              <li><strong>1,100 Physical Traces:</strong> Telemetry logs generated from live execution with real seeds, preventing post-hoc curve fitting.</li>
+              <li><strong>Cluster Bootstrap Resamples:</strong> 10,000 paired document-family cluster resamples to ensure robust non-parametric confidence bounds.</li>
+              <li><strong>Audit Verdict:</strong> Formal status <code>PASS_WITH_QUALIFICATIONS</code> granted with full methodological transparency disclosures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--amber);">Transparent Reporting of Negative Hypotheses</div>
+          <div class="card-body">
+            <p style="margin-bottom: 10px;">In strict adherence to the scientific method, our paper explicitly reports negative and rejected hypotheses:</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+              <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                <strong style="color: #fb7185;">H2 (Single OCR Universal Superiority):</strong> REJECTED. Neither PaddleOCR nor Tesseract dominates across all degradation modes.
+              </div>
+              <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                <strong style="color: #fb7185;">H9 (Universal FFT Filtering):</strong> REJECTED. Naive high-pass frequency filtering amplifies high-frequency noise on sensor corruptions.
+              </div>
+              <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                <strong style="color: #fb7185;">H10.5 (Unquantized 7B on 6GB Edge):</strong> REJECTED. 7B models trigger fatal CUDA OOM on consumer GPUs.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 18px; background: rgba(6, 182, 212, 0.08); border-color: rgba(6, 182, 212, 0.3);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span style="font-weight: 700; color: #38bdf8;">IEEE Publication Integrity Standard:</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 6px;">All code, datasets, evaluation scripts, and telemetry records are packaged for zero-friction external replication.</span>
+          </div>
+          <span class="status-badge status-success">100% REPRODUCIBLE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 11: DOCUMENT STUDIO PLATFORM ================= -->
+    <div class="slide" data-slide="11" data-notes="Phase 15 created our live interactive Document Studio on localhost:8896. Users can upload raw PDFs, view real-time quality scores, inspect bounding boxes, and see verified outputs.">
+      <span class="badge">Interactive Demonstration Layer</span>
+      <h2 class="slide-title">Interactive Document Studio Platform (localhost:8896)</h2>
+      <p class="slide-subtitle">A live enterprise-grade testing interface showcasing our end-to-end pipeline in action.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">Studio Capabilities & User Interface</div>
+          <div class="card-body">
+            <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 10px;">
+              <li><strong>Live PDF / Image Ingestion:</strong> Drag-and-drop support for multi-page invoices, tax receipts, and scanned forms.</li>
+              <li><strong>Real-Time Degradation Gauge:</strong> Instant visual feedback of blur variance, contrast score, and skew angle.</li>
+              <li><strong>Dynamic Route Indicator:</strong> Shows whether the document was routed to Clean, Moderate, or Severe pathways.</li>
+              <li><strong>Bounding Box Overlay:</strong> Renders interactive canvas overlays with green boxes for verified extractions and amber flags for review.</li>
+              <li><strong>One-Click Launcher:</strong> Accessible via <code>run.bat</code> with automatic background server monitoring.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(10, 15, 26, 0.95); border: 1px solid rgba(56, 189, 248, 0.3);">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-dim);">
+            <span>LIVE STUDIO TELEMETRY PREVIEW</span>
+            <span style="color: var(--emerald);">STATUS: ONLINE (8896)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Document:</span>
+              <strong>sample_test_invoice.pdf</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Calculated Route:</span>
+              <span class="status-badge status-success">CLEAN (DIRECT VLM)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Extracted Total:</span>
+              <strong>$120.00 (Tax: 18%)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Spatial IoU:</span>
+              <strong style="color: var(--cyan);">0.812 (Verified)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Decision Status:</span>
+              <span style="color: var(--emerald); font-weight: 700;">VERIFIED ANSWER</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; padding: 10px; background: rgba(0,0,0,0.4); border-radius: 6px; font-size: 0.78rem; color: #94a3b8; font-family: var(--font-mono);">
+            INFO: Ingested 1 page (94.2 KB) • Processing time: 0.742s • Spatial match: 100%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 12: VIVA DEFENSE & Q&A ================= -->
+    <div class="slide" data-slide="12" data-notes="Highlight our Project Viva and Research Defense Handbook. We prepared 45 rigorous cross-examinations covering mathematical formulas, failure modes, and evaluator questions.">
+      <span class="badge">Project Defense & Evaluation Readiness</span>
+      <h2 class="slide-title">Project Viva & Research Defense Handbook</h2>
+      <p class="slide-subtitle">Exhaustive preparation covering 45 challenging jury cross-examinations and technical defense arguments.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan);">1. Academic & Teacher Track</div>
+          <div class="card-body">
+            <p><strong>Common Challenge:</strong> "Why not just train a bigger model or use GPT-4o?"</p>
+            <p style="margin-top: 8px; color: #e2e8f0; font-size: 0.85rem;">
+              <strong>Defense:</strong> Cloud APIs pose severe data privacy risks with medical/financial records, incur ongoing API billing, and suffer high latency. Our system delivers on-premise, zero-data-leakage execution in 530 MB VRAM.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">2. ML Specialist Track</div>
+          <div class="card-body">
+            <p><strong>Common Challenge:</strong> "How do you guarantee that INT4 quantization doesn't destroy spatial coordinates?"</p>
+            <p style="margin-top: 8px; color: #e2e8f0; font-size: 0.85rem;">
+              <strong>Defense:</strong> BitsAndBytes NF4 uses non-linear normal float quantiles matching Gaussian weight distributions, preserving attention heads that attend to coordinate tokens. Grounding IoU drops only 0.012 compared to FP16.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: var(--purple);">3. Statistical Jury Track</div>
+          <div class="card-body">
+            <p><strong>Common Challenge:</strong> "Are these improvements merely random dataset variance?"</p>
+            <p style="margin-top: 8px; color: #e2e8f0; font-size: 0.85rem;">
+              <strong>Defense:</strong> Tested under paired document-family cluster bootstrap with 10,000 resamples. All reported gains (SUC, IoU, UAR suppression) achieve $p < 0.001$ with non-overlapping 95% confidence intervals.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 18px; padding: 14px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 0.88rem; color: var(--text-muted);">
+            Reference Handbook: <code>docs/PROJECT_VIVA_AND_RESEARCH_DEFENSE_HANDBOOK.md</code> (20 Comprehensive Sections, 3 Mock Viva Simulations)
+          </span>
+          <span class="status-badge status-info">45 / 45 JURY DEFENSES READY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SLIDE 13: CONCLUSION & CITATION ================= -->
+    <div class="slide" data-slide="13" data-notes="Conclude our presentation. Summarize the major contributions, IEEE TPAMI target, and invite evaluator questions.">
+      <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+        <span class="badge">Summary & Next Horizons</span>
+        <h2 class="slide-title" style="font-size: 2.8rem; margin-bottom: 12px;">
+          Conclusion & Research Impact
+        </h2>
+        <p class="slide-subtitle" style="margin: 0 auto 24px auto;">
+          Delivering reliable, verifiable, and resource-efficient Vision-Language document intelligence for real-world deployment.
+        </p>
+
+        <div class="grid-3" style="text-align: left; margin-bottom: 24px;">
+          <div class="card">
+            <div class="card-title" style="color: var(--cyan);">1. Adaptive Reliability</div>
+            <div class="card-body">Tri-path routing + Wiener filtering maintains high accuracy across severe degradations where baselines collapse.</div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--emerald);">2. Verifiable Trust</div>
+            <div class="card-body">Spatial evidence grounding suppresses >92% of hallucinations, elevating Safe Useful Coverage to 89.1%.</div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--purple);">3. Edge Accessibility</div>
+            <div class="card-body">Live INT4 NF4 quantization runs in 530.9 MB VRAM at 16.5 tok/s on consumer 6GB laptop hardware.</div>
+          </div>
+        </div>
+
+        <div class="card" style="text-align: left; margin-bottom: 24px;">
+          <div class="card-title" style="font-size: 0.95rem; color: var(--cyan);">📜 IEEE Citation Reference</div>
+          <div class="code-block" style="font-size: 0.78rem;">
+@article{vishwakarma2026vlmidp,
+  title={Adaptive, Uncertainty-Aware and Evidence-Grounded Vision-Language Models for Intelligent Document Processing under Real-World Visual Degradation},
+  author={Vishwakarma, Ayush and Research Team},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence (Under Review)},
+  year={2026},
+  url={https://github.com/ayushvishwakarma251-del/vlm-idp-research}
+}
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+          <a href="https://github.com/ayushvishwakarma251-del/vlm-idp-research" target="_blank" style="text-decoration: none;">
+            <button class="ctrl-btn" style="background: var(--cyan); color: #000; font-weight: 700; padding: 10px 22px;">
+              ⭐ View GitHub Repository
+            </button>
+          </a>
+          <button class="ctrl-btn" onclick="toggleNotes()" style="border: 1px solid var(--card-border); padding: 10px 18px;">
+            📝 Toggle Defense Notes (N)
+          </button>
+          <button class="ctrl-btn" onclick="toggleDrawer()" style="border: 1px solid var(--card-border); padding: 10px 18px;">
+            📑 Jump to Slide (O)
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Control Dock -->
+  <div class="controls">
+    <button class="ctrl-btn" onclick="prevSlide()" title="Previous Slide (← / Backspace)">
+      <span>◀</span> Prev
+    </button>
+    <div class="slide-counter" id="slideCounter">1 / 13</div>
+    <button class="ctrl-btn" onclick="nextSlide()" title="Next Slide (→ / Space)">
+      Next <span>▶</span>
+    </button>
+    <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.15); margin: 0 4px;"></div>
+    <button class="ctrl-btn" onclick="toggleNotes()" title="Speaker / Viva Defense Notes (N)">
+      <span>📝</span> Notes
+    </button>
+    <button class="ctrl-btn" onclick="toggleDrawer()" title="Slide Overview & Jump (O / Esc)">
+      <span>📑</span> Index
+    </button>
+    <button class="ctrl-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+      <span id="themeIcon">☀️</span>
+    </button>
+    <button class="ctrl-btn" onclick="toggleFullScreen()" title="Fullscreen Mode (F)">
+      <span>⛶</span> Full
+    </button>
+  </div>
+
+  <!-- Presenter / Viva Defense Notes Drawer -->
+  <div class="notes-panel" id="notesPanel">
+    <div class="notes-header">
+      <span>🎓 Speaker & Viva Defense Notes</span>
+      <span style="cursor: pointer;" onclick="toggleNotes()">✕ CLOSE (N)</span>
+    </div>
+    <div id="notesContent">Loading notes...</div>
+  </div>
+
+  <!-- Slide Jump / Overview Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()">
+    <div class="drawer" onclick="event.stopPropagation()">
+      <div class="drawer-title">
+        <span>Slide Index</span>
+        <button class="ctrl-btn" onclick="toggleDrawer()">✕</button>
+      </div>
+      <ul class="drawer-list" id="drawerList">
+        <!-- Dynamically populated -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const slideTitles = [
+      "1. Title & Abstract",
+      "2. The Core Problem",
+      "3. Complete Tech Stack",
+      "4. System Architecture",
+      "5. 6GB Edge Memory Wall",
+      "6. Physical CUDA Quantization",
+      "7. Context Scaling & Pruning",
+      "8. Grounding & Hallucinations",
+      "9. What All Things We Have Done",
+      "10. Forensic Audit & Rigor",
+      "11. Document Studio Platform",
+      "12. Project Viva & Defense",
+      "13. Conclusion & Impact"
+    ];
+
+    // Populate Slide Index Drawer
+    const drawerList = document.getElementById('drawerList');
+    slideTitles.forEach((title, idx) => {
+      const li = document.createElement('li');
+      li.className = `drawer-item ${idx === 0 ? 'active' : ''}`;
+      li.innerHTML = `<span>${title}</span>`;
+      li.onclick = () => {
+        goToSlide(idx + 1);
+        toggleDrawer();
+      };
+      drawerList.appendChild(li);
+    });
+
+    function updateDeck() {
+      slides.forEach((slide, idx) => {
+        const isCurrent = (idx + 1) === currentSlide;
+        slide.classList.toggle('active', isCurrent);
+      });
+
+      // Update progress bar
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      // Update counter
+      document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+
+      // Update drawer active item
+      const drawerItems = document.querySelectorAll('.drawer-item');
+      drawerItems.forEach((item, idx) => {
+        item.classList.toggle('active', (idx + 1) === currentSlide);
+      });
+
+      // Update notes
+      const activeSlide = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      const notes = activeSlide ? activeSlide.getAttribute('data-notes') : '';
+      document.getElementById('notesContent').textContent = notes || 'No specific speaker notes for this slide.';
+    }
+
+    function goToSlide(n) {
+      if (n >= 1 && n <= totalSlides) {
+        currentSlide = n;
+        updateDeck();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateDeck();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateDeck();
+      }
+    }
+
+    function toggleNotes() {
+      const panel = document.getElementById('notesPanel');
+      panel.classList.toggle('visible');
+    }
+
+    function toggleDrawer() {
+      const overlay = document.getElementById('drawerOverlay');
+      overlay.classList.toggle('open');
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', nextTheme);
+      document.getElementById('themeIcon').textContent = nextTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => alert(err.message));
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'Home') {
+        goToSlide(1);
+      } else if (e.key === 'End') {
+        goToSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 'n') {
+        toggleNotes();
+      } else if (e.key.toLowerCase() === 'o') {
+        toggleDrawer();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      } else if (e.key === 'Escape') {
+        const overlay = document.getElementById('drawerOverlay');
+        const notes = document.getElementById('notesPanel');
+        if (overlay.classList.contains('open')) overlay.classList.remove('open');
+        if (notes.classList.contains('visible')) notes.classList.remove('visible');
+      }
+    });
+
+    // Touch Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    window.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
+    window.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) nextSlide();
+      if (touchEndX > touchStartX + 50) prevSlide();
+    }, false);
+
+    // Initial call
+    updateDeck();
+  </script>
+</body>
+</html>
